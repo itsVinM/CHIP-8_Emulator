@@ -1,8 +1,10 @@
-Hello there 👋
 
-This is my first emulator, the CHIP-8 writen in C++.
+# CHIP-8 Emulator
 
-There is still work to do though, like refactoring and making more rom to work.
+First emulator project - CHIP-8 virtual machine in C++. Built to learn 
+opcode decoding, instruction dispatch, and state machine design. These 
+are the same techniques I use for parsing SCPI commands and binary 
+telemetry in test automation.
 
 
 <img width="627" height="344" alt="Screenshot 2025-10-05 at 11 39 47" src="https://github.com/user-attachments/assets/94ea7b6f-f52b-4097-ac21-542e92f48505" />
