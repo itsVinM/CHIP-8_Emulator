@@ -6,7 +6,7 @@
 ![SDL2](https://img.shields.io/badge/SDL2-121013?style=flat&logo=sdl&logoColor=red)
 ![Build](https://img.shields.io/badge/build-passing-brightgreen)
 
-Cycle-accurate CHIP-8 virtual machine in C++17. Built as the **first validation target** of a portable hardware-software test framework — the same test architecture later used for Game Boy (Rust), STM32F401RE (embedded Rust), and PX4 SITL fault injection.
+Cycle-accurate CHIP-8 virtual machine in C++17. 
 
 
 <img width="627" height="344" alt="Screenshot 2025-10-05 at 11 39 47" src="https://github.com/user-attachments/assets/94ea7b6f-f52b-4097-ac21-542e92f48505" />
@@ -45,11 +45,6 @@ ValidationFramework
 | Timers | Delay + sound @ 60Hz |
 | Renderer | SDL2 |
 
-**VF dual-role** — VF is both a general-purpose register and the carry/borrow/collision flag. Opcode 8XY4 (ADD with carry) must set VF = 1 on overflow without corrupting unrelated register state. This is tested explicitly.
-
-**Stack overflow** — at depth 17 the system transitions to a defined fault state rather than undefined behavior. This mirrors the safe-state FSM pattern in the STM32 self-health project.
-
-**Memory boundary** — program space starts at 0x200. Access into the 0x000–0x1FF interpreter-reserved region is tested for correct fault behavior.
 
 ---
 
@@ -100,27 +95,3 @@ ctest --output-on-failure
 | Display | XOR collision flag, sprite clipping at screen edges |
 | Fault injection | Register corruption mid-execution, bad PC values |
 
----
-
-## Tested ROMs
-
-| ROM | Status |
-|---|---|
-| chip8-logo.ch8 | ✅ |
-| IBM Logo | ✅ |
-| test_opcode.ch8 | ✅ |
-| Pong | ✅ |
-
----
-
-## Framework context
-
-Part of a multi-target validation framework. Each target implements the same interface — fault injection, structured reporting, and test isolation are consistent across all targets.
-
-| Target | Language | Status |
-|---|---|---|
-| CHIP-8 | C++17 + Google Test | ✅ Complete |
-| Game Boy LR35902 | Rust + proptest | 🔄 In progress |
-| STM32F401RE | Rust embedded + CLI | 🔄 In progress |
-| Digital Analyzer | Rust + SCPI | 🔄 In progress |
-| PX4 SITL | Python + MAVLink | 📋 Planned |
